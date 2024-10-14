@@ -154,9 +154,13 @@ async def websocket_endpoint(websocket: WebSocket, name: str, access_token: str 
     try:
         while True:
             data = await websocket.receive_text()
+            all_users_in_chat = db.query(Connections).filter(Connections.id_chat_connection == is_chat_exist.id).all()
+            list_of_ids = [buff_id.id for buff_id in all_users_in_chat]
             await manager.broadcast(f"Client {sender_info.email}: {data}", list_of_ids)
     except WebSocketDisconnect:
         manager.disconnect(websocket, sender_connection_info.id)
+        db.delete(sender_connection_info)
+        db.commit()
         await manager.broadcast(f"Client {sender_info.email} left the chat.", list_of_ids)
 
 
