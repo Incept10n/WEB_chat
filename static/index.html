@@ -2,28 +2,35 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Добро пожаловать!</title>
+    <title>Welcome!</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div id="mainContent">
-        <h1>Добро пожаловать!</h1>
-        <button onclick="showRegisterForm()">Регистрация</button>
-        <button onclick="showLoginForm()">Вход</button>
+        <h1>Welcome!</h1>
+        <button onclick="showRegisterForm()">Register</button>
+        <button onclick="showLoginForm()">Login</button>
         
         <div id="authForms">
             <form id="registerForm" style="display:none;" onsubmit="register(event)">
-                <h2>Регистрация</h2>
-                <input type="email" placeholder="Email" id="regEmail" required>
-                <input type="password" placeholder="Пароль" id="regPassword" required>
-                <button type="submit">Регистрация</button>
+                <h2>Register</h2>
+                <div class="loginForm__inputs">
+                    <input type="email" placeholder="Email" id="regEmail" required>
+                    <input type="password" placeholder="Password" id="regPassword" required>
+                </div>
+                <div id="register-message" style="color: red; display: none"></div>
+                <button type="submit">Register</button>
             </form>
 
             <form id="loginForm" style="display:none;" onsubmit="login(event)">
-                <h2>Вход</h2>
-                <input type="email" placeholder="Email" id="loginEmail" required>
-                <input type="password" placeholder="Пароль" id="loginPassword" required>
-                <button type="submit">Вход</button>
+                <h2>Login</h2>
+                <div class="loginForm__inputs">
+                    <input type="email" placeholder="Email" id="loginEmail" required>
+                    <input type="password" placeholder="Пароль" id="loginPassword" required>
+                </div>
+                
+                <div id="error-login-message" style="color: red; display: none"></div>
+                <button type="submit">Login</button>
             </form>
         </div>
     </div>

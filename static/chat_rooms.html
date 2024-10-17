@@ -2,15 +2,33 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Мои чаты</title>
+    <title>My chats</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Ваши чаты</h1>
-    <button onclick="createChat()">Создать новый чат</button>
-    <input type="text" id="search" placeholder="Поиск чата..." oninput="searchChats()">
+    <h1>Your chats:</h1>
+    <ul id="ownerChatList"></ul>
+
+    <div id="createChat" style="display: none", onsubmit="createChat(event)">
+        <form id="CreateCharForm">
+            <input id="nameOfChat" type="text" placeholder="Enter the name of the chat">
+            <button type="submit">Create</button>
+        </form>
+    </div>
+
+    <button id="createChatButton" onclick="showInsertName();">Create new chat</button><br>
+    <div id="createChatMessage"></div>
+
+    <div id="deleteChatMessage"></div>
+
+    <h1>Search new chats</h1>
+    <input type="text" id="search" placeholder="Search..." onsubmit="searchChats()">
+    <button onclick="searchChats();">Search</button>
+    <div id="searchError"></div>
     <ul id="chatList"></ul>
+
     
     <script src="/static/script-chat_rooms.js"></script>
+    <script>getOwnerChats();</script>
 </body>
 </html>

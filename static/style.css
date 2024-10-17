@@ -12,25 +12,33 @@ body {
     text-align: center;
 }
 
-form {
-    margin-top: 20px;
-}
-
 form input {
     display: block;
-    margin: 10px auto;
+    margin: 0;
+}
+
+form {
+    display: flex;
+    justify-content: center; 
+}
+
+form button {
+    display: inline-block;
+    margin: 0; 
 }
 
 ul {
     list-style-type: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 }
 
 li {
     background: #eee;
     margin: 5px 0;
     padding: 10px;
-    cursor: pointer;
     transition: background 0.3s;
 }
 
@@ -43,4 +51,12 @@ li:hover {
     overflow-y: scroll;
     border: 1px solid #ccc;
     padding: 10px;
+}
+
+.loginForm__inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
 }
