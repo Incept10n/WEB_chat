@@ -2,9 +2,10 @@ const params = new URLSearchParams(window.location.search);
 const chatName = params.get('name');
 document.getElementById('chatTitle').textContent = chatName;
 
-const socket = new WebSocket(`ws://${window.location.host}/ws/${chatName}`);
+const socket = new WebSocket(`ws://localhost/ws/${chatName}`);
 
 socket.onerror = function() {
+
     document.body.innerHTML = '';
 
     const message = document.createElement('div');

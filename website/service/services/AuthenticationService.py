@@ -30,5 +30,6 @@ class AuthenticationService:
             "email": user.email
             })
 
-        response.set_cookie(key="access_token", value=access_token.decode('utf-8'), httponly=True)
+        response.set_cookie(key="access_token", value=access_token.decode('utf-8'), httponly=True, samesite='None')
+
         return {"access_token": access_token}

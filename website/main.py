@@ -1,22 +1,18 @@
-from fastapi import Cookie, Depends, FastAPI, WebSocket, Response
+from fastapi import Cookie, Depends, FastAPI, Response
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from fastapi import Response
 from fastapi.staticfiles import StaticFiles
 from model.some import get_db
 from schema import Chat_room, Login, Register
-from service.ConnectionManager import ConnectionManager
 from service.services.ChatService import ChatService
 from service.services.AuthenticationService import AuthenticationService
-from service.services.WebsocketService import WebsocketService    
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-manager = ConnectionManager()
 authenticationService = AuthenticationService()
 chatService = ChatService()
-websocketService = WebsocketService()
 
 @app.get("/")
 async def get():
@@ -46,6 +42,6 @@ async def get_chat_rooms(sequence: str = None, db: Session = Depends(get_db)):
 async def get_owner_chat_rooms(access_token: str = Cookie(None), db: Session = Depends(get_db)):
     return chatService.getOwnerChat(access_token, db)
 
-@app.websocket("/ws/{name}")
-async def websocket_endpoint(websocket: WebSocket, name: str, access_token: str = Cookie(None), db: Session = Depends(get_db)):
-    await websocketService.handleWebsocket(websocket, name, manager, access_token, db)
+@app.get("/is_chat_exist")
+async def is_chat_exist(name: str, db: Session = Depends(get_db)):
+    return chatService.isChatExist(name, db)

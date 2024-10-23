@@ -49,4 +49,12 @@ class ChatService:
             return {"owner_rooms": [owner_room.name for owner_room in ownerRooms]}
         raise HTTPException(status_code=401, detail="Invalid token")
 
+    def isChatExist(self, name: str, db: Session = Depends(get_db)):
+        searchChatResult = db.query(ChatRooms).filter(ChatRooms.name == name).first()
+        if searchChatResult:
+            return searchChatResult.id
+        else:
+            raise HTTPException(status_code=404, detail="The chat does not exist")
+        
+
                 
