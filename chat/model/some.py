@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker 
 from passlib.context import CryptContext
 
-DATABASE_URL = "postgresql://chat:2143658790ADM+@localhost/webchat?options=-csearch_path%3Dmy_schema"
+DATABASE_URL = "postgresql://chat:2143658790ADM+@localhost/chat?options=-csearch_path%3Dmy_schema"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
