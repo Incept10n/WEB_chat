@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"  
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  
+    depends_on:
+      - website
+      - chat
+
+  website:
+    build:
+      context: ./website  
+    expose:
+      - "9000"
+    environment:
+      - DATABASE_URL=postgresql://chat:2143658790ADM+@db1/website?options=-csearch_path%3Dmy_schema 
+
+  db1:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: chat
+      POSTGRES_PASSWORD: 2143658790ADM+
+      POSTGRES_DB: website
+    volumes:
+      - db1_data:/var/lib/postgresql/data 
+
+
+  chat:
+    build:
+      context: ./chat  
+    expose:
+      - "8000"
+    environment:
+      - DATABASE_URL=postgresql://chat:2143658790ADM+@db2/chat?options=-csearch_path%3Dmy_schema 
+
+  db2:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: chat
+      POSTGRES_PASSWORD: 2143658790ADM+
+      POSTGRES_DB: chat
+    volumes:
+      - db2_data:/var/lib/postgresql/data 
+
+volumes:
+  db1_data: 
+  db2_data: 

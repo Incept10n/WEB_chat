@@ -43,8 +43,7 @@ def is_token_valid(access_token):
     return user_id, user_email
 
 def is_chat_exist(chatName: str):
-    response = requests.get(f'http://localhost/is_chat_exist?name={chatName}')
+    response = requests.get(f'http://nginx/is_chat_exist?name={chatName}')
     if (response.status_code != 200):
         raise HTTPException(status_code=404, detail="The chat does not exist")
-    # return response.json()['id']
     return response.json()

@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "9000:9000"
+    environment:
+      - DATABASE_URL=postgresql://chat:2143658790ADM+@db/website?options=-csearch_path%3Dmy_schema 
+
+
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: chat
+      POSTGRES_PASSWORD: 2143658790ADM+ 
+      POSTGRES_DB: website
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
