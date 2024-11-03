@@ -24,12 +24,10 @@ class WebsocketService:
                     list_of_ids = [buff_id.id for buff_id in all_users_in_chat]
                     await manager.connect(websocket, sender_email, list_of_ids, sender_connection_info.id)
             else:
-                raise HTTPException(status_code=9999, detail="token is not valid")
+                raise HTTPException(status_code=403, detail="token is not valid")
         except Exception as e:
             print(f"Unexpected error: {e}")
-            await websocket.close(code=4000, reason="Unexpected error occurred")
-            
-            
+            await websocket.close(code=403, reason="Unexpected error occurred")
         try:
             while True:
                 data = await websocket.receive_text()
